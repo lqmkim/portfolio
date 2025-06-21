@@ -4,6 +4,7 @@
 		"strictNullChecks": true,
 		"jsx": "preserve",
 		"baseUrl": "./",
+		"types": ["astro/client", "astro/jsx-runtime"],
 		"paths": {
 			"@components/*": ["./src/components/*"],
 			"@contents": ["./src/contents/*"],
@@ -13,5 +14,6 @@
 			"@utils/*": ["./src/utils/*"],
 			"@data/*": ["./src/data/*"]
 		}
-	}
+	},
+	"plugins": [{ "name": "astro" }]
 }

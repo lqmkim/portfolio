@@ -1,10 +1,12 @@
 ---
-title: "meet sanju, designer founder"
+title: "meet luqman, designer founder"
 description: "I run ThisUX, a design-led product studio. I'm working on ideas like sticai.com, abogrow.com, uiino.com, supaprompts.com, ffmpeg.info, and more. Always tinkering."
 pubDate: 'Sept 1 2024'
 ---
 
-I run [ThisUX](https://thisux.com), a design-led product studio. We make things that work.
+I'm a builder at heart — someone who finds joy in creating things that actually matter, even if it means breaking the rules along the way.
+
+I run [Forthify Technologies](https://forthify.tech), a design-led product studio. We make things that work.
 
 For years, I wore many hats. Now I'm doing my own thing.
 
