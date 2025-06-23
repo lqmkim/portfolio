@@ -1,19 +1,41 @@
 {
-	"extends": "astro/tsconfigs/strict",
-	"compilerOptions": {
-		"strictNullChecks": true,
-		"jsx": "preserve",
-		"baseUrl": "./",
-		"types": ["astro/client", "astro/jsx-runtime"],
-		"paths": {
-			"@components/*": ["./src/components/*"],
-			"@contents": ["./src/contents/*"],
-			"@layouts/*": ["./src/layouts/*"],
-			"@pages/*": ["./src/pages/*"],
-			"@styles/*": ["./src/styles/*"],
-			"@utils/*": ["./src/utils/*"],
-			"@data/*": ["./src/data/*"]
-		}
-	},
-	"plugins": [{ "name": "astro" }]
+  "extends": "astro/tsconfigs/strict",
+  "compilerOptions": {
+    "strictNullChecks": true,
+    "jsx": "react-jsx",
+    "baseUrl": "./",
+    "types": [
+      "astro/client",
+      "astro/jsx-runtime"
+    ],
+    "paths": {
+      "@components/*": [
+        "./src/components/*"
+      ],
+      "@contents": [
+        "./src/contents/*"
+      ],
+      "@layouts/*": [
+        "./src/layouts/*"
+      ],
+      "@pages/*": [
+        "./src/pages/*"
+      ],
+      "@styles/*": [
+        "./src/styles/*"
+      ],
+      "@utils/*": [
+        "./src/utils/*"
+      ],
+      "@data/*": [
+        "./src/data/*"
+      ]
+    },
+    "jsxImportSource": "react"
+  },
+  "plugins": [
+    {
+      "name": "astro"
+    }
+  ]
 }
