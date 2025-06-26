@@ -1,12 +1,17 @@
 ---
-import type { CollectionEntry } from "astro:content";
 import { Header } from "@components/misc";
 import FormattedDate from "@components/misc/formatted-date.astro";
 import { BaseHead } from "@components/seo";
 import RootLayout from "@layouts/root-layout.astro";
 import { clsx } from "@utils/index";
 
-type Props = CollectionEntry<"writing">["data"];
+type Props = {
+  title: string;
+  description: string;
+  pubDate: string;
+  heroImage?: string;
+  readingTime: number;
+};
 
 const { title, description, pubDate, heroImage, readingTime } = Astro.props;
 ---
@@ -35,7 +40,7 @@ const { title, description, pubDate, heroImage, readingTime } = Astro.props;
         </h1>
         <div class="flex flex-row gap-2 w-full">
           <p class="text-start text-gray-500 font-medium">
-            <FormattedDate date={pubDate.toString()} />
+            <FormattedDate date={pubDate} />
           </p>
           <span class="text-gray-500 font-medium">·</span>
           <p class="text-start text-gray-500 font-medium">

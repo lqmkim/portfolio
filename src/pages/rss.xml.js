@@ -1,31 +1,31 @@
 import rss from "@astrojs/rss";
 import { SITE_DESCRIPTION, SITE_TITLE } from "@data/index";
-import { getCollection } from "astro:content";
+import { fetchWritings, fetchThoughts, fetchShips } from "../utils/sanity";
 
 export async function GET(context) {
-	const [posts, thoughts, ships] = await Promise.all([
-		getCollection("writing"),
-		getCollection("thought"),
-		getCollection("ship"),
-	]);
+  const [posts, thoughts, ships] = await Promise.all([
+    fetchWritings(),
+    fetchThoughts(),
+    fetchShips(),
+  ]);
 
-	return rss({
-		title: SITE_TITLE,
-		description: SITE_DESCRIPTION,
-		site: context.site,
-		items: [
-			...posts.map((post) => ({
-				...post.data,
-				link: `/writings/${post.slug}/`,
-			})),
-			...thoughts.map((thought) => ({
-				...thought.data,
-				link: `/thoughts/${thought.slug}/`,
-			})),
-			...ships.map((ship) => ({
-				...ship.data,
-				link: `/ships/${ship.slug}/`,
-			})),
-		],
-	});
+  return rss({
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
+    site: context.site,
+    items: [
+      ...posts.map((post) => ({
+        ...post,
+        link: `/writings/${post.slug}/`,
+      })),
+      ...thoughts.map((thought) => ({
+        ...thought,
+        link: `/thoughts/${thought.slug}/`,
+      })),
+      ...ships.map((ship) => ({
+        ...ship,
+        link: `/ships/${ship.slug}/`,
+      })),
+    ],
+  });
 }

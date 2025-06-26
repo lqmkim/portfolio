@@ -14,6 +14,7 @@ interface Writing {
   description: string;
   category: string;
   pubDate: string;
+  content?: any[];
 }
 
 export const getStaticPaths = async () => {
@@ -34,7 +35,7 @@ const blocks = writing.content ?? [];
 
 <WritingLayout {...writing} readingTime={readingTime}>
   {
-    blocks.map((block: any, i: number) => {
+    blocks.map((block: any) => {
       if (block._type === "endCTA") return <EndCTA {...block} />;
       return <div set:html={portableTextToHtml([block])} />;
     })

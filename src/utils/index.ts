@@ -1,14 +1,10 @@
-import { getCollection } from "astro:content";
-
 export type Ship = {
-  data: {
-    title: string;
-    description: string;
-    category: string;
-    ship_count: number;
-    pubDate: Date;
-    updatedDate: Date;
-  };
+  _id: string;
+  title: string;
+  description: string;
+  category: string;
+  ship_count: number;
+  pubDate: string;
   slug: string;
 };
 
@@ -56,23 +52,24 @@ export function formatYearMonth(date: Date): string {
 export async function groupShipsByYearMonthSorted(): Promise<
   Record<string, Ship[]>
 > {
-  // Fetch ships collection
-  const ships = await getCollection("ship");
+  // Import fetchShips dynamically to avoid circular dependencies
+  const { fetchShips } = await import("@utils/sanity");
+  const ships = await fetchShips();
 
   // Group ships by year and month
-  const groupedShips = ships.reduce<Record<string, Ship[]>>(
-    (accumulator, ship) => {
-      const yearMonthKey = formatYearMonth(ship.data.pubDate);
+  const groupedShips = ships.reduce(
+    (accumulator: Record<string, Ship[]>, ship: any) => {
+      const yearMonthKey = formatYearMonth(new Date(ship.pubDate));
       accumulator[yearMonthKey] = accumulator[yearMonthKey] || [];
       accumulator[yearMonthKey].push(ship as Ship);
       return accumulator;
     },
-    {},
+    {} as Record<string, Ship[]>
   );
 
   // Sort the yearMonth keys in descending order
   const sortedYearMonthKeys = Object.keys(groupedShips).sort((a, b) =>
-    b.localeCompare(a),
+    b.localeCompare(a)
   );
 
   // Reconstruct the groupedShips object with sorted keys
@@ -81,7 +78,7 @@ export async function groupShipsByYearMonthSorted(): Promise<
       sortedAccumulator[key] = groupedShips[key];
       return sortedAccumulator;
     },
-    {},
+    {}
   );
 
   return sortedGroupedShips;
