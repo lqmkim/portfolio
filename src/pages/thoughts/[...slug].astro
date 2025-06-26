@@ -1,10 +1,27 @@
 ---
+export const prerender = true;
+
 import ThoughtsLayout from "@layouts/thoughts-layout.astro";
 import { ScrollProgress } from "@components/misc";
 import { getReadingTime } from "@utils/index";
-import { fetchThoughtBySlug } from "@utils/sanity";
+import { fetchThoughtBySlug, fetchThoughts } from "@utils/sanity";
 import EndCTA from "@components/cta/end-cta.astro";
 import { portableTextToHtml } from "@utils/portableTextToHtml";
+
+interface Thought {
+  slug: string;
+  title: string;
+  description: string;
+  category: string;
+  pubDate: string;
+}
+
+export const getStaticPaths = async () => {
+  const thoughts = await fetchThoughts();
+  return thoughts.map((thought: Thought) => ({
+    params: { slug: thought.slug },
+  }));
+};
 
 const { slug } = Astro.params;
 const thought = await fetchThoughtBySlug(slug as string);

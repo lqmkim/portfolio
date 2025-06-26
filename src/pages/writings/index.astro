@@ -1,4 +1,6 @@
 ---
+export const prerender = true;
+
 import { WritingItem } from "@components/cards";
 import { Header } from "@components/misc";
 import { BaseHead } from "@components/seo";
@@ -21,11 +23,7 @@ const writings = await fetchWritings();
   <RootLayout>
     <div id="Header+title" class="flex flex-col w-full gap-6 max-w-xl">
       <Header />
-      <h1
-        class="w-full text-7xl font-medium tracking-tight font-['EB_Garamond']"
-      >
-        Writings
-      </h1>
+      <h1 class="w-full text-7xl font-medium tracking-tight">writings</h1>
 
       {
         writings.map((writing: any) => (

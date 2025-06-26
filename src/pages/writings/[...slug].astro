@@ -1,10 +1,27 @@
 ---
+export const prerender = true;
+
 import WritingLayout from "@layouts/writing-layout.astro";
 import { ScrollProgress } from "@components/misc";
 import { getReadingTime } from "@utils/index";
-import { fetchWritingBySlug } from "@utils/sanity";
+import { fetchWritingBySlug, fetchWritings } from "@utils/sanity";
 import EndCTA from "@components/cta/end-cta.astro";
 import { portableTextToHtml } from "@utils/portableTextToHtml";
+
+interface Writing {
+  slug: string;
+  title: string;
+  description: string;
+  category: string;
+  pubDate: string;
+}
+
+export const getStaticPaths = async () => {
+  const writings = await fetchWritings();
+  return writings.map((writing: Writing) => ({
+    params: { slug: writing.slug },
+  }));
+};
 
 const { slug } = Astro.params;
 const writing = await fetchWritingBySlug(slug as string);

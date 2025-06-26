@@ -1,10 +1,27 @@
 ---
+export const prerender = true;
+
 import ShipsLayout from "@layouts/ships-layout.astro";
 import { ScrollProgress } from "@components/misc";
 import { getReadingTime } from "@utils/index";
-import { fetchShipBySlug } from "@utils/sanity";
+import { fetchShipBySlug, fetchShips } from "@utils/sanity";
 import EndCTA from "@components/cta/end-cta.astro";
 import { portableTextToHtml } from "@utils/portableTextToHtml";
+
+interface Ship {
+  slug: string;
+  title: string;
+  description: string;
+  category: string;
+  pubDate: string;
+}
+
+export const getStaticPaths = async () => {
+  const ships = await fetchShips();
+  return ships.map((ship: Ship) => ({
+    params: { slug: ship.slug },
+  }));
+};
 
 const { slug } = Astro.params;
 const ship = await fetchShipBySlug(slug as string);
