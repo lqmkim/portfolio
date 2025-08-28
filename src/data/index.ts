@@ -38,7 +38,7 @@ export const ogImage = {
 export const products = [
   {
     name: "ProReg",
-    url: "https://linktr.ee/proreg",
+    url: "https://proreg.app",
     image: "/products/proreg.svg",
   },
 ];
