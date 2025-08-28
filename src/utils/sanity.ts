@@ -4,7 +4,7 @@ const sanityClient = createClient({
   projectId: "htyf2i7o",
   dataset: "production",
   apiVersion: "2024-06-01",
-  useCdn: true,
+  useCdn: false, // Disable CDN to get fresh content
 });
 
 export async function fetchThoughts() {
